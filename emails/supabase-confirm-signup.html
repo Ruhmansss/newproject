@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html lang="ru" xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
   <head>
+    <!--
+      href у кнопки и важных <a> — только {{ .ConfirmationURL }} (с токеном; подставляется Supabase).
+      После клика пользователь попадёт на URL из signUp: emailRedirectTo
+      (у нас: https://newproject.arturs-ruhmans.workers.dev/login), если этот URL в Supabase → Redirect URLs.
+    -->
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="x-apple-disable-message-reformatting" />
@@ -61,8 +66,10 @@
                   </tr>
                 </table>
                 <p style="margin: 0; font-size: 13px; line-height: 1.5; color: #6b6b7a; word-break: break-all;">
-                  Если кнопка не открывается, скопируйте ссылку в браузер:<br />
-                  <a href="{{ .ConfirmationURL }}" target="_blank" style="color: #a5b4fc; text-decoration: underline;">{{ .ConfirmationURL }}</a>
+                  После подтверждения вас направит на
+                  <span style="color: #a8a8b8;">https://newproject.arturs-ruhmans.workers.dev/login</span><br />
+                  Если кнопка не сработала, вставьте в адресную строку <strong>полную</strong> ссылку:<br />
+                  <a href="{{ .ConfirmationURL }}" target="_blank" style="color: #a5b4fc; text-decoration: underline; word-break: break-all;">{{ .ConfirmationURL }}</a>
                 </p>
               </td>
             </tr>
