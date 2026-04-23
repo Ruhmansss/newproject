@@ -1,6 +1,5 @@
 import { type FormEvent, useEffect, useId, useState } from 'react'
 import type { User } from '@supabase/supabase-js'
-import { getAuthCallbackUrl } from '../lib/authRedirect'
 import { supabase } from '../lib/supabase'
 
 type AuthMode = 'login' | 'register'
@@ -125,10 +124,7 @@ export function AuthPage() {
       const { data, error: signUpError } = await supabase.auth.signUp({
         email,
         password,
-        options: {
-          data: name ? { full_name: name } : undefined,
-          emailRedirectTo: getAuthCallbackUrl(),
-        },
+        options: { data: name ? { full_name: name } : undefined },
       })
       if (signUpError) {
         setError(mapAuthError(signUpError.message))
@@ -152,7 +148,7 @@ export function AuthPage() {
     setInfo(null)
     setLoading(true)
     const { error: resetError } = await supabase.auth.resetPasswordForEmail(email.trim(), {
-      redirectTo: getAuthCallbackUrl(),
+      redirectTo: `${window.location.origin}/`,
     })
     setLoading(false)
     if (resetError) {
